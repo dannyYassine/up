@@ -1,25 +1,30 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import { StatusBar } from 'expo-status-bar';
 import { Button, StyleSheet, Text, View } from 'react-native';
-import { AppPresenter } from './AppPresenter';
+import { AppPresenter } from './src/presenters/AppPresenter';
+import ProjectList from './src/components/ProjectList';
 
 export default function App() {
-  const [text, setText] = useState('');
-
+  const [renderList, setRenderList] = useState(false);
   const presenter = new AppPresenter({
-    updateText: (label) => {
-      setText(label);
+    updateRenderList: () => {
+      setRenderList(!renderList);
     }
   });
 
   return (
     <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <Text>Let's do this!</Text>
-      <Button title="Let's go!" onPress={() => presenter.onButtonPressed()}/>
-
-      <Text>{text}</Text>
       <StatusBar style="auto" />
+
+      <View style={styles.container}>
+        <Text>Services on your Render dashboard</Text>
+        <Button title="Start" onPress={() => presenter.onButtonPressed()} />
+      </View>
+      {renderList && (
+        <View style={styles.list}>
+          <ProjectList />
+        </View>
+      )}
     </View>
   );
 }
@@ -29,6 +34,9 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#fff',
     alignItems: 'center',
-    justifyContent: 'center',
+    justifyContent: 'center'
   },
+  list: {
+    flex: 3
+  }
 });
