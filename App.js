@@ -1,8 +1,11 @@
 import React, { useState } from 'react';
-import { StatusBar } from 'expo-status-bar';
-import { Button, StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
+import Home from './src/components/WelcomeView';
 import { AppPresenter } from './src/presenters/AppPresenter';
-import ProjectList from './src/components/ProjectList';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+
+const Stack = createNativeStackNavigator();
 
 export default function App() {
   const [renderList, setRenderList] = useState(false);
@@ -13,19 +16,14 @@ export default function App() {
   });
 
   return (
-    <View style={styles.container}>
-      <StatusBar style="auto" />
-
-      <View style={styles.container}>
-        <Text>Services on your Render dashboard</Text>
-        <Button title="Start" onPress={() => presenter.onButtonPressed()} />
-      </View>
-      {renderList && (
-        <View style={styles.list}>
-          <ProjectList />
-        </View>
-      )}
-    </View>
+    <NavigationContainer>
+      <Stack.Navigator>
+        <Stack.Screen name="Home" component={Home} options={{ headerShown: false }} />
+        <Stack.Group screenOptions={{ presentation: 'modal' }} options={{ headerShown: false }}>
+          <Stack.Screen name="Modal" component={Home} />
+        </Stack.Group>
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 }
 
@@ -35,8 +33,5 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center'
-  },
-  list: {
-    flex: 3
   }
 });
