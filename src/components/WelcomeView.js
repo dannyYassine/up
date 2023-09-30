@@ -3,10 +3,8 @@ import { Text, ImageBackground, StyleSheet, View, Button } from 'react-native';
 import backgroundImage from '../../assets/home.png';
 
 export default class Home extends Component {
-  componentDidMount() {
-    setTimeout(() => {
-      this.props.navigation.navigate('Modal');
-    }, 1000);
+  onButtonPressed() {
+    this.props.navigation.navigate('Modal');
   }
 
   render() {
@@ -14,6 +12,9 @@ export default class Home extends Component {
       <ImageBackground source={backgroundImage} resizeMode="fill" style={styles.image}>
         <View style={styles.container}>
           <Text style={styles.title}>up</Text>
+        </View>
+        <View style={styles.container}>
+          <Button title="Let's start" style={styles.button} background="red" onPress={() => this.onButtonPressed()} />
         </View>
       </ImageBackground>
     );
@@ -29,12 +30,15 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: 'center',
-    justifyContent: 'center',
-    marginBottom: 200
+    justifyContent: 'center'
   },
   title: {
     color: '#ffffff',
     fontSize: 28,
     fontFamily: 'Verdana'
+  },
+  button: {
+    marginTop: 40,
+    backgroundColor: 'red'
   }
 });

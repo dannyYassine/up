@@ -4,6 +4,7 @@ import Home from './src/components/WelcomeView';
 import { AppPresenter } from './src/presenters/AppPresenter';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import EnterProjectKeyView from './src/components/EnterProjectKeyView';
 
 const Stack = createNativeStackNavigator();
 
@@ -19,8 +20,8 @@ export default function App() {
     <NavigationContainer>
       <Stack.Navigator>
         <Stack.Screen name="Home" component={Home} options={{ headerShown: false }} />
-        <Stack.Group screenOptions={{ presentation: 'modal' }} options={{ headerShown: false }}>
-          <Stack.Screen name="Modal" component={Home} />
+        <Stack.Group screenOptions={{ presentation: 'modal' }}>
+          <Stack.Screen name="Modal" component={EnterProjectKeyView} options={{ headerShown: false }} />
         </Stack.Group>
       </Stack.Navigator>
     </NavigationContainer>
