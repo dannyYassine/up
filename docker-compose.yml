@@ -1,0 +1,19 @@
+version: '3'
+
+networks:
+  up:
+    driver: bridge
+
+services:
+  mobile:
+    container_name: up-mobile
+    build:
+      context: .
+      dockerfile: dev-env/mobile.dockerfile
+    command: tail -f /dev/null
+    ports:
+      - "8081:8081"
+    volumes:
+      - ./client:/usr/src/client
+    networks:
+      - up

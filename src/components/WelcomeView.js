@@ -4,12 +4,16 @@ import backgroundImage from '../../assets/home.png';
 
 export default class Home extends Component {
   onButtonPressed() {
-    this.props.navigation.navigate('Modal');
+    this.props.navigation.navigate('Modal', { onKeyEntered: (...args) => this.onKeyEntered(...args) });
+  }
+
+  onKeyEntered(key) {
+    console.log(key);
   }
 
   render() {
     return (
-      <ImageBackground source={backgroundImage} resizeMode="fill" style={styles.image}>
+      <ImageBackground source={backgroundImage} resizeMode="cover" style={styles.image}>
         <View style={styles.container}>
           <Text style={styles.title}>up</Text>
         </View>

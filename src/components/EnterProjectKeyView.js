@@ -14,12 +14,13 @@ export default class EnterProjectKeyView extends Component {
   }
 
   onButtonPressed() {
+    this.props.route.params.onKeyEntered('yo');
     this.props.navigation.pop();
   }
 
   render() {
     return (
-      <ImageBackground source={backgroundImage} resizeMode="fill" style={styles.image}>
+      <ImageBackground source={backgroundImage} resizeMode="cover" style={styles.image}>
         <View style={styles.container}>
           <TextInput
             style={styles.input}
